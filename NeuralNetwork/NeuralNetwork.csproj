@@ -39,8 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batch.cs" />
+    <Compile Include="Gradient.cs" />
+    <Compile Include="Math.cs" />
     <Compile Include="NeuralNetwork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrainingRecord.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

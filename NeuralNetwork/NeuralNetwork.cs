@@ -4,44 +4,67 @@ namespace NeuralNetwork
 {
     public class NeuralNetwork
     {
-        readonly Random random = new Random();
-
-        private double[][][] weights;
-        private double[][] biases;
+        private readonly double[][][] weights;
+        private readonly double[][] biases;
 
         public NeuralNetwork(int[] layerSizes)
         {
             weights = new double[layerSizes.Length - 1][][];
+            biases = new double[layerSizes.Length - 1][];
 
             for (int i = 0; i < layerSizes.Length - 1; i++)
             {
-                weights[i] = GetRandomMatrix(layerSizes[i], layerSizes[i + 1]);
-                biases[i] = GetRandomVector(layerSizes[i + 1]);
+                weights[i] = Math.GetRandomMatrix(layerSizes[i], layerSizes[i + 1]);
+                biases[i] = Math.GetRandomVector(layerSizes[i + 1]);
             }
         }
 
-        private double[] GetRandomVector(int n)
+        public double[] FeedForward(double[] input)
         {
-            var vector = new double[n];
+            double[] activations = null;
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < weights.GetLength(0); i++)
             {
-                vector[i] = random.NextDouble();
+                activations = Math.Sigmoid(Math.Add(
+                        Math.Product(weights[i], activations),
+                        biases[i]));
             }
 
-            return vector;
+            return activations;
         }
 
-        private double[][] GetRandomMatrix(int m, int n)
+        public void Train(TrainingRecord[] trainingData, int epochs, double learningRate)
         {
-            var matrix = new double[m][];
-
-            for (int i = 0; i < m; i++)
+            for (int epoch = 0; epoch < epochs; epoch++)
             {
-                matrix[i] = GetRandomVector(n);
-            }
+                var batches = Batch.Split(Batch.Shuffle(trainingData));
 
-            return matrix;
+                foreach (var batch in batches)
+                {
+                    Train(batch, learningRate);
+                }
+            }
+        }
+
+        private void Train(TrainingRecord[] batch, double learningRate)
+        {
+            var gradient = BackPropagate(batch);
+
+            for (int i = 0; i < weights.GetLength(0); i++)
+            {
+                weights[i] = Math.Subtract(
+                    weights[i],
+                    Math.Product(learningRate/batch.Length, gradient.Weights[i]));
+
+                biases[i] = Math.Subtract(
+                    biases[i],
+                    Math.Product(learningRate/batch.Length, gradient.Biases[i]));
+            }
+        }
+
+        private Gradient BackPropagate(TrainingRecord[] records)
+        {
+            throw new NotImplementedException();
         }
     }
 }
