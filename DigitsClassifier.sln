@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MnistData", "MnistData", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork", "NeuralNetwork\NeuralNetwork.csproj", "{33EA0C4D-5769-4A64-A581-6F525C29755C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitsClassifier", "DigitsClassifier\DigitsClassifier.csproj", "{CE395223-E318-40F9-BA2B-62A033B8256C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{33EA0C4D-5769-4A64-A581-6F525C29755C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33EA0C4D-5769-4A64-A581-6F525C29755C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33EA0C4D-5769-4A64-A581-6F525C29755C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE395223-E318-40F9-BA2B-62A033B8256C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE395223-E318-40F9-BA2B-62A033B8256C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE395223-E318-40F9-BA2B-62A033B8256C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE395223-E318-40F9-BA2B-62A033B8256C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
