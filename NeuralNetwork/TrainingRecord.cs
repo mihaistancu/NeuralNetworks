@@ -2,7 +2,7 @@
 {
     public class TrainingRecord
     {
-        public int[] Input;
-        public int[] Output;
+        public double[] Input;
+        public double[] Output;
     }
 }

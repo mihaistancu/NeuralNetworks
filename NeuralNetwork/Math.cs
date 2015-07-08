@@ -77,11 +77,11 @@ namespace NeuralNetwork
 
         public static double[] Subtract(double[] a, double[] b)
         {
-            double[] result = new double[a.Length];
+            double[] result = a;
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = a[i] - b[i];
+                result[i] -= b[i];
             }
 
             return result;
@@ -114,14 +114,69 @@ namespace NeuralNetwork
             return result;
         }
 
+        public static double[][] Add(double[][] a, double[][] b)
+        {
+            double[][] result = a;
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                for (int j = 0; j < result.Length; j++)
+                {
+                    result[i][j] += b[i][j];
+                }
+            }
+
+            return result;
+        }
+
+        public static double[][][] Add(double[][][] a, double[][][] b)
+        {
+            double[][][] result = a;
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                for (int j = 0; j < result.Length; j++)
+                {
+                    for (int k = 0; k < result.Length; k++)
+                    {
+                        result[i][j][k] += b[i][j][k];
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static double Sigmoid(double z)
         {
             return 1.0/(1.0 + System.Math.Exp(-z));
         }
 
+        public static double SigmoidPrime(double z)
+        {
+            return Sigmoid(z)*(1 - Sigmoid(z));
+        }
+
         public static double[] Sigmoid(double[] x)
         {
             return x.Select(Sigmoid).ToArray();
+        }
+
+        public static double[] SigmoidPrime(double[] x)
+        {
+            return x.Select(SigmoidPrime).ToArray();
+        }
+
+        public static double[] HadamardProduct(double[] a, double[] b)
+        {
+            double[] result = a;
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] *= b[i];
+            }
+
+            return result;
         }
     }
 }
