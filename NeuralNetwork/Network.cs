@@ -21,7 +21,7 @@
         {
             double[] activations = input;
 
-            for (int layer = 0; layer < weights.GetLength(0); layer++)
+            for (int layer = 0; layer < weights.Length; layer++)
             {
                 activations = GetActivations(layer, activations);
             }

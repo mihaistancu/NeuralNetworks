@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.Linq;
 
 namespace NeuralNetwork
@@ -33,7 +34,7 @@ namespace NeuralNetwork
 
         public static double[] Product(double[][] matrix, double[] vector)
         {
-            double[] result = new double[matrix.GetLength(0)];
+            double[] result = new double[matrix.Length];
 
             for (int i = 0; i < matrix.Length; i++)
             {
@@ -50,11 +51,11 @@ namespace NeuralNetwork
 
         public static double[] Product(double scalar, double[] vector)
         {
-            double[] result = vector;
+            double[] result = new double[vector.Length];
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] *= scalar;
+                result[i] = scalar * vector[i];
             }
 
             return result;
@@ -62,13 +63,15 @@ namespace NeuralNetwork
 
         public static double[][] Product(double scalar, double[][] matrix)
         {
-            double[][] result = matrix;
+            double[][] result = new double[matrix.Length][];
 
             for (int i = 0; i < result.Length; i++)
             {
+                result[i] = new double[matrix[i].Length];
+
                 for (int j = 0; j < result.Length; j++)
                 {
-                    result[i][j] *= scalar;
+                    result[i][j] = scalar * matrix[i][j];
                 }
             }
 
@@ -77,11 +80,11 @@ namespace NeuralNetwork
 
         public static double[] Subtract(double[] a, double[] b)
         {
-            double[] result = a;
+            double[] result = new double[a.Length];
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] -= b[i];
+                result[i] = a[i] - b[i];
             }
 
             return result;
@@ -89,13 +92,15 @@ namespace NeuralNetwork
 
         public static double[][] Subtract(double[][] a, double[][] b)
         {
-            double[][] result = a;
+            double[][] result = new double[a.Length][];
 
-            for (int i = 0; i < result.GetLength(0); i++)
+            for (int i = 0; i < result.Length; i++)
             {
+                result[i] = new double[a[i].Length];
+
                 for (int j = 0; j < result.GetLength(1); j++)
                 {
-                    result[i][j] -= b[i][j];
+                    result[i][j] = a[i][j] - b[i][j];
                 }
             }
 
@@ -104,11 +109,11 @@ namespace NeuralNetwork
 
         public static double[] Add(double[] a, double[] b)
         {
-            double[] result = a;
+            double[] result = new double[a.Length];
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] += b[i];
+                result[i] = a[i] + b[i];
             }
 
             return result;
@@ -116,13 +121,15 @@ namespace NeuralNetwork
 
         public static double[][] Add(double[][] a, double[][] b)
         {
-            double[][] result = a;
+            double[][] result = new double[a.Length][];
 
             for (int i = 0; i < result.Length; i++)
             {
+                result[i] = new double[a[i].Length];
+
                 for (int j = 0; j < result.Length; j++)
                 {
-                    result[i][j] += b[i][j];
+                    result[i][j] = a[i][j] + b[i][j];
                 }
             }
 
@@ -131,15 +138,19 @@ namespace NeuralNetwork
 
         public static double[][][] Add(double[][][] a, double[][][] b)
         {
-            double[][][] result = a;
+            double[][][] result = new double[a.Length][][];
 
             for (int i = 0; i < result.Length; i++)
             {
+                result[i] = new double[a[i].Length][];
+
                 for (int j = 0; j < result.Length; j++)
                 {
+                    result[i][j] = new double[a[i][j].Length];
+
                     for (int k = 0; k < result.Length; k++)
                     {
-                        result[i][j][k] += b[i][j][k];
+                        result[i][j][k] = a[i][j][k] + b[i][j][k];
                     }
                 }
             }
@@ -169,11 +180,11 @@ namespace NeuralNetwork
 
         public static double[] HadamardProduct(double[] a, double[] b)
         {
-            double[] result = a;
+            double[] result = new double[a.Length];
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] *= b[i];
+                result[i] = a[i] * b[i];
             }
 
             return result;
