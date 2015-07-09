@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MnistDataParser")]
+[assembly: AssemblyTitle("NeuralNetwork.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MnistDataParser")]
+[assembly: AssemblyProduct("NeuralNetwork.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("eb226563-60ad-4bbe-8390-e696e206ac75")]
+[assembly: Guid("3a2bfc22-88ab-4a51-85fd-3069980b444a")]
 
 // Version information for an assembly consists of the following four values:
 //

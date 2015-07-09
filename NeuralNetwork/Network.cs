@@ -1,11 +1,11 @@
 ﻿namespace NeuralNetwork
 {
-    public class NeuralNetwork
+    public class Network
     {
         private readonly double[][][] weights;
         private readonly double[][] biases;
 
-        public NeuralNetwork(int[] layerSizes)
+        public Network(int[] layerSizes)
         {
             weights = new double[layerSizes.Length - 1][][];
             biases = new double[layerSizes.Length - 1][];
@@ -40,7 +40,7 @@
         {
             for (int epoch = 0; epoch < epochs; epoch++)
             {
-                var batches = Batch.Split(Batch.Shuffle(trainingData));
+                var batches = Batch.Split(Batch.Shuffle(trainingData), 30);
 
                 foreach (var batch in batches)
                 {

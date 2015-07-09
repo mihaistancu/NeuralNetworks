@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MnistDataParser", "MnistDataParser\MnistDataParser.csproj", "{9133856D-8442-4504-BD99-045461E891AE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MnistData", "MnistData", "{AFEF27B8-F136-46AF-A1AC-67FB420E1B12}"
 	ProjectSection(SolutionItems) = preProject
 		MnistData\t10k-images.idx3-ubyte = MnistData\t10k-images.idx3-ubyte
@@ -17,16 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork", "NeuralNetw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitsClassifier", "DigitsClassifier\DigitsClassifier.csproj", "{CE395223-E318-40F9-BA2B-62A033B8256C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork.Tests", "NeuralNetwork.Tests\NeuralNetwork.Tests.csproj", "{FD37089C-F7AC-4C81-A884-DABE42E9EFC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9133856D-8442-4504-BD99-045461E891AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9133856D-8442-4504-BD99-045461E891AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9133856D-8442-4504-BD99-045461E891AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9133856D-8442-4504-BD99-045461E891AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33EA0C4D-5769-4A64-A581-6F525C29755C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33EA0C4D-5769-4A64-A581-6F525C29755C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33EA0C4D-5769-4A64-A581-6F525C29755C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +31,10 @@ Global
 		{CE395223-E318-40F9-BA2B-62A033B8256C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE395223-E318-40F9-BA2B-62A033B8256C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE395223-E318-40F9-BA2B-62A033B8256C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD37089C-F7AC-4C81-A884-DABE42E9EFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD37089C-F7AC-4C81-A884-DABE42E9EFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD37089C-F7AC-4C81-A884-DABE42E9EFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD37089C-F7AC-4C81-A884-DABE42E9EFC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

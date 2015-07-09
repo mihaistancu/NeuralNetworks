@@ -42,7 +42,7 @@
     <Compile Include="Batch.cs" />
     <Compile Include="Gradient.cs" />
     <Compile Include="Math.cs" />
-    <Compile Include="NeuralNetwork.cs" />
+    <Compile Include="Network.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrainingRecord.cs" />
   </ItemGroup>
