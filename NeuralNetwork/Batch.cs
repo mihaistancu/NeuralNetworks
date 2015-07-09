@@ -1,23 +1,21 @@
 ﻿using System;
+using System.Linq;
 
 namespace NeuralNetwork
 {
-    class Batch
+    public class Batch
     {
         private static readonly Random random = new Random();
 
         public static T[][] Split<T>(T[] batch, int size)
         {
-            int batchCount = batch.Length/size;
+            var batchCount = (int) System.Math.Ceiling((double)batch.Length/size);
+
             var batches = new T[batchCount][];
 
             for (int i = 0; i < batchCount; i++)
             {
-                batches[i] = new T[size];
-                for (int j = 0; j < size && i + j < batch.Length;j++)
-                {
-                    batches[i][j] = batch[i*j + j];
-                }
+                batches[i] = batch.Skip(i*size).Take(size).ToArray();
             }
 
             return batches;
