@@ -1,12 +1,40 @@
 ﻿using System;
-using System.Data.SqlTypes;
 using System.Linq;
 
 namespace NeuralNetwork
 {
-    class Math
+    public class Math
     {
         private static readonly Random random = new Random();
+
+        public static double[][] EmptyClone(double[][] matrix)
+        {
+            var result = new double[matrix.Length][];
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                result[i] = new double[matrix[i].Length];
+            }
+
+            return result;
+        }
+
+        public static double[][][] EmptyClone(double[][][] matrix)
+        {
+            var result = new double[matrix.Length][][];
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                result[i] = new double[matrix[i].Length][];
+
+                for (int j= 0; j< matrix[i].Length; j++)
+                {
+                    result[i][j] = new double[matrix[i][j].Length];
+                }
+            }
+
+            return result;
+        }
 
         public static double[] GetRandomVector(int n)
         {
@@ -32,6 +60,26 @@ namespace NeuralNetwork
             return matrix;
         }
 
+        public static double[][] Transpose(double[][] matrix)
+        {
+            int matrixRows = matrix.Length;
+            int matrixColumns = matrix[0].Length;
+            
+            var result = new double[matrixColumns][];
+
+            for (int i = 0; i < matrixColumns; i++)
+            {
+                result[i] = new double[matrixRows];
+
+                for (int j = 0; j < matrixRows; j++)
+                {
+                    result[i][j] = matrix[j][i];
+                }
+            }
+
+            return result;
+        }
+
         public static double[] Product(double[][] matrix, double[] vector)
         {
             double[] result = new double[matrix.Length];
@@ -40,7 +88,7 @@ namespace NeuralNetwork
             {
                 result[i] = 0;
 
-                for (int j = 0; j < matrix.Length; j++)
+                for (int j = 0; j < matrix[i].Length; j++)
                 {
                     result[i] += matrix[i][j]*vector[j];
                 }
@@ -53,7 +101,7 @@ namespace NeuralNetwork
         {
             double[] result = new double[vector.Length];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < vector.Length; i++)
             {
                 result[i] = scalar * vector[i];
             }
@@ -82,7 +130,7 @@ namespace NeuralNetwork
         {
             double[] result = new double[a.Length];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 result[i] = a[i] - b[i];
             }
@@ -94,11 +142,11 @@ namespace NeuralNetwork
         {
             double[][] result = new double[a.Length][];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 result[i] = new double[a[i].Length];
 
-                for (int j = 0; j < result.GetLength(1); j++)
+                for (int j = 0; j < a[i].Length; j++)
                 {
                     result[i][j] = a[i][j] - b[i][j];
                 }
@@ -111,7 +159,7 @@ namespace NeuralNetwork
         {
             double[] result = new double[a.Length];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 result[i] = a[i] + b[i];
             }
@@ -123,11 +171,11 @@ namespace NeuralNetwork
         {
             double[][] result = new double[a.Length][];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 result[i] = new double[a[i].Length];
 
-                for (int j = 0; j < result.Length; j++)
+                for (int j = 0; j < a[i].Length; j++)
                 {
                     result[i][j] = a[i][j] + b[i][j];
                 }
@@ -140,15 +188,15 @@ namespace NeuralNetwork
         {
             double[][][] result = new double[a.Length][][];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 result[i] = new double[a[i].Length][];
 
-                for (int j = 0; j < result.Length; j++)
+                for (int j = 0; j < a[i].Length; j++)
                 {
                     result[i][j] = new double[a[i][j].Length];
 
-                    for (int k = 0; k < result.Length; k++)
+                    for (int k = 0; k < a[i][j].Length; k++)
                     {
                         result[i][j][k] = a[i][j][k] + b[i][j][k];
                     }
@@ -165,7 +213,8 @@ namespace NeuralNetwork
 
         public static double SigmoidPrime(double z)
         {
-            return Sigmoid(z)*(1 - Sigmoid(z));
+            return System.Math.Exp(-z)/
+                   System.Math.Pow(1.0 + System.Math.Exp(-z), 2);
         }
 
         public static double[] Sigmoid(double[] x)
@@ -182,7 +231,7 @@ namespace NeuralNetwork
         {
             double[] result = new double[a.Length];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 result[i] = a[i] * b[i];
             }

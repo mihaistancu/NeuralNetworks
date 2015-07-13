@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using NeuralNetwork;
 
-namespace MnistDataParser
+namespace DigitsClassifier
 {
-    public class Parser
+    public class MnistDataParser
     {
         public TrainingRecord[] Parse(string imagesFile, string labelsFile)
         {

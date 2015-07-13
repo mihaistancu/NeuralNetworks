@@ -2,18 +2,23 @@
 {
     public class Network
     {
-        private readonly double[][][] weights;
-        private readonly double[][] biases;
+        public readonly double[][][] Weights;
+        public readonly double[][] Biases;
 
         public Network(int[] layerSizes)
         {
-            weights = new double[layerSizes.Length - 1][][];
-            biases = new double[layerSizes.Length - 1][];
-
+            Weights = new double[layerSizes.Length - 1][][];
+            
             for (int i = 0; i < layerSizes.Length - 1; i++)
             {
-                weights[i] = Math.GetRandomMatrix(layerSizes[i], layerSizes[i + 1]);
-                biases[i] = Math.GetRandomVector(layerSizes[i + 1]);
+                Weights[i] = Math.GetRandomMatrix(layerSizes[i + 1], layerSizes[i]);
+            }
+
+            Biases = new double[layerSizes.Length][];
+            
+            for (int i = 0; i < layerSizes.Length; i++)
+            {
+                Biases[i] = Math.GetRandomVector(layerSizes[i]);
             }
         }
 
@@ -21,19 +26,14 @@
         {
             double[] activations = input;
 
-            for (int layer = 0; layer < weights.Length; layer++)
+            for (int layer = 0; layer < Weights.Length; layer++)
             {
-                activations = GetActivations(layer, activations);
+                activations = Math.Sigmoid(Math.Add(
+                    Math.Product(Weights[layer], activations),
+                    Biases[layer + 1]));
             }
 
             return activations;
-        }
-
-        private double[] GetActivations(int layer, double[] input)
-        {
-            return Math.Sigmoid(Math.Add(
-                        Math.Product(weights[layer], input),
-                        biases[layer]));
         }
 
         public void Train(TrainingRecord[] trainingData, int epochs, double learningRate)
@@ -51,7 +51,11 @@
 
         private void Train(TrainingRecord[] batch, double learningRate)
         {
-            var gradient = new Gradient();
+            var gradient = new Gradient
+            {
+                Weights = Math.EmptyClone(Weights),
+                Biases = Math.EmptyClone(Biases)
+            };
 
             foreach (var trainingRecord in batch)
             {
@@ -60,65 +64,65 @@
                 gradient.Biases = Math.Add(gradient.Biases, batchGradient.Biases);
             }
 
-            for (int layer = 0; layer < weights.Length; layer++)
+            for (int layer = 0; layer < Weights.Length; layer++)
             {
-                weights[layer] = Math.Subtract(
-                    weights[layer],
+                Weights[layer] = Math.Subtract(
+                    Weights[layer],
                     Math.Product(learningRate/batch.Length, gradient.Weights[layer]));
 
-                biases[layer] = Math.Subtract(
-                    biases[layer],
+                Biases[layer] = Math.Subtract(
+                    Biases[layer],
                     Math.Product(learningRate/batch.Length, gradient.Biases[layer]));
             }
         }
 
         private Gradient BackPropagate(TrainingRecord record)
         {
-            int layers = weights.Length;
+            int layers = Weights.Length;
 
             //Feedforward
-            double[][] a = new double[layers][];
-            double[][] z = new double[layers][];
+            double[][] a = new double[layers + 1][];
+            double[][] z = new double[layers + 1][];
             a[0] = record.Input;
 
-            for (int layer = 1; layer < layers; layer++)
+            for (int layer = 0; layer < layers; layer++)
             {
-                z[layer] = Math.Add(
-                    Math.Product(weights[layer], a[layer - 1]),
-                    biases[layer]);
+                z[layer + 1] = Math.Add(
+                    Math.Product(Weights[layer], a[layer]),
+                    Biases[layer + 1]);
 
-                a[layer] = Math.Sigmoid(z[layer]);
+                a[layer + 1] = Math.Sigmoid(z[layer + 1]);
             }
 
             //Backpropagate
-            double[][] error = new double[layers][];
+            double[][] delta = Math.EmptyClone(Biases);
 
-            error[0] = Math.HadamardProduct(
-                Math.Subtract(a[layers - 1], record.Output),
-                Math.SigmoidPrime(z[layers - 1]));
+            delta[layers] = Math.HadamardProduct(
+                Math.Subtract(a[layers], record.Output),
+                Math.SigmoidPrime(z[layers]));
 
-            for (int layer = layers - 1; layer > 1; layer++)
+            for (int layer = layers - 1; layer > 0; layer--)
             {
-                error[layer - 1] = Math.HadamardProduct(
-                    Math.Product(weights[layer], error[layer]),
-                    Math.SigmoidPrime(z[layer - 1]));
+                delta[layer] = Math.HadamardProduct(
+                    Math.Product(Math.Transpose(Weights[layer]), delta[layer + 1]),
+                    Math.SigmoidPrime(z[layer]));
             }
 
             //Gradient
-            var gradient = new Gradient();
+            var gradient = new Gradient {Weights = Math.EmptyClone(Weights)};
 
-            for (int layer = 1; layer < layers; layer++)
-            {
-                for (int j = 0; j < weights[layer].Length; j++)
+            for (int layer = 0; layer < layers; layer++)
+            {   
+                for (int j = 0; j < Weights[layer].Length; j++)
                 {
-                    for (int k = 0; k < weights[layer][j].Length; k++)
+                    for (int k = 0; k < Weights[layer][j].Length; k++)
                     {
-                        gradient.Weights[layer][j][k] = a[layer - 1][k]*error[layer][j];
+                        gradient.Weights[layer][j][k] = a[layer][k]*delta[layer + 1][j];
                     }
                 }
             }
 
-            gradient.Biases = error;
+            gradient.Biases = delta;
 
             return gradient;
         }
