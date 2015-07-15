@@ -40,7 +40,7 @@
         {
             for (int epoch = 0; epoch < epochs; epoch++)
             {
-                var batches = Batch.Split(Batch.Shuffle(trainingData), 30);
+                var batches = Batch.Split(Batch.Shuffle(trainingData), 10);
 
                 foreach (var batch in batches)
                 {
@@ -69,7 +69,10 @@
                 Weights[layer] = Math.Subtract(
                     Weights[layer],
                     Math.Product(learningRate/batch.Length, gradient.Weights[layer]));
+            }
 
+            for (int layer = 0; layer < Biases.Length; layer++)
+            {
                 Biases[layer] = Math.Subtract(
                     Biases[layer],
                     Math.Product(learningRate/batch.Length, gradient.Biases[layer]));

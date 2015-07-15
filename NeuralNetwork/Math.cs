@@ -117,7 +117,7 @@ namespace NeuralNetwork
             {
                 result[i] = new double[matrix[i].Length];
 
-                for (int j = 0; j < result.Length; j++)
+                for (int j = 0; j < matrix[i].Length; j++)
                 {
                     result[i][j] = scalar * matrix[i][j];
                 }

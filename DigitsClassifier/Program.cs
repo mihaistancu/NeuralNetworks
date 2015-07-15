@@ -16,7 +16,7 @@ namespace DigitsClassifier
             var inputLayerLength = trainingRecords[0].Input.Length;
 
             var neuralNetwork = new Network(new[] {inputLayerLength, 30, 10});
-            neuralNetwork.Train(trainingRecords, 1, 1);
+            neuralNetwork.Train(trainingRecords, 30, 3.0);
             
             var benchmark = new Benchmark();
             double successRate = benchmark.ComputeAccuracy(neuralNetwork, trainingRecords);
