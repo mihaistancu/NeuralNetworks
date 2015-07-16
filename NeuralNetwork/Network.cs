@@ -36,16 +36,13 @@
             return activations;
         }
 
-        public void Train(TrainingRecord[] trainingData, int epochs, double learningRate)
+        public void Train(TrainingRecord[] trainingData, double learningRate, int miniBatchSize)
         {
-            for (int epoch = 0; epoch < epochs; epoch++)
-            {
-                var batches = Batch.Split(Batch.Shuffle(trainingData), 10);
+            var batches = Batch.Split(Batch.Shuffle(trainingData), miniBatchSize);
 
-                foreach (var batch in batches)
-                {
-                    Train(batch, learningRate);
-                }
+            foreach (var batch in batches)
+            {
+                Train(batch, learningRate);
             }
         }
 

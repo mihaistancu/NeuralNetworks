@@ -13,12 +13,13 @@ namespace DigitsClassifier
 
             var neuralNetwork = new Network(new[] {784, 30, 10});
             var benchmark = new Benchmark(neuralNetwork);
-                
-            while (true)
-            {
-                neuralNetwork.Train(trainingRecords, 1, .1);
 
-                Console.WriteLine("Success rate: {0}", benchmark.AccuracyFor(testRecords));
+            for (double accuracy = 0; accuracy < .9;)
+            {
+                accuracy = benchmark.AccuracyFor(testRecords);
+                Console.WriteLine("Success rate: {0} %", accuracy*100);
+
+                neuralNetwork.Train(trainingRecords, .01, 10);
             }
         }
     }

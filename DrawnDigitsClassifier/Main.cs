@@ -57,8 +57,12 @@ namespace DrawnDigitsClassifier
         {
             var learnnigRate = double.Parse(learningRateTextBox.Text);
             var epochs = Int32.Parse(epochsTextBox.Text);
+            const int miniBatchSize = 10;
 
-            network.Train(trainingData.ToArray(), epochs, learnnigRate);   
+            for (int epoch = 0; epoch < epochs; epoch++)
+            {
+                network.Train(trainingData.ToArray(), learnnigRate, miniBatchSize);
+            }
         }
         
         private void Recognize(object sender, EventArgs e)
