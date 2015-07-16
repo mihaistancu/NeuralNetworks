@@ -7,8 +7,8 @@
     <ProjectGuid>{CE395223-E318-40F9-BA2B-62A033B8256C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DigitsClassifier</RootNamespace>
-    <AssemblyName>DigitsClassifier</AssemblyName>
+    <RootNamespace>MnistDigitsClassifier</RootNamespace>
+    <AssemblyName>MnistDigitsClassifier</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
