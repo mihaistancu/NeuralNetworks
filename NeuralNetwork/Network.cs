@@ -2,8 +2,8 @@
 {
     public class Network
     {
-        public readonly double[][][] Weights;
-        public readonly double[][] Biases;
+        public double[][][] Weights;
+        public double[][] Biases;
 
         public Network(int[] layerSizes)
         {
@@ -64,19 +64,13 @@
                 gradient.Biases = Math.Add(gradient.Biases, batchGradient.Biases);
             }
 
-            for (int layer = 0; layer < Weights.Length; layer++)
-            {
-                Weights[layer] = Math.Subtract(
-                    Weights[layer],
-                    Math.Product(learningRate/batch.Length, gradient.Weights[layer]));
-            }
-
-            for (int layer = 0; layer < Biases.Length; layer++)
-            {
-                Biases[layer] = Math.Subtract(
-                    Biases[layer],
-                    Math.Product(learningRate/batch.Length, gradient.Biases[layer]));
-            }
+            Weights = Math.Subtract(
+                Weights,
+                Math.Product(learningRate/batch.Length, gradient.Weights));
+            
+            Biases = Math.Subtract(
+                Biases,
+                Math.Product(learningRate/batch.Length, gradient.Biases));
         }
 
         private Gradient BackPropagate(TrainingRecord record)

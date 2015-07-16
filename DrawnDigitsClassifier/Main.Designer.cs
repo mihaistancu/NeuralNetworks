@@ -44,8 +44,6 @@
             this.TrainButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.RecognizeButton = new System.Windows.Forms.Button();
-            this.digit = new DrawnDigitsClassifier.Digit();
-            this.grid = new DrawnDigitsClassifier.Grid();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -54,6 +52,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.digit = new DrawnDigitsClassifier.Digit();
+            this.grid = new DrawnDigitsClassifier.Grid();
             this.SuspendLayout();
             // 
             // rowsTextBox
@@ -125,7 +125,7 @@
             this.epochsTextBox.Name = "epochsTextBox";
             this.epochsTextBox.Size = new System.Drawing.Size(100, 22);
             this.epochsTextBox.TabIndex = 11;
-            this.epochsTextBox.Text = "30";
+            this.epochsTextBox.Text = "10000";
             // 
             // label5
             // 
@@ -159,7 +159,7 @@
             this.hiddenLayerTextBox.Name = "hiddenLayerTextBox";
             this.hiddenLayerTextBox.Size = new System.Drawing.Size(100, 22);
             this.hiddenLayerTextBox.TabIndex = 7;
-            this.hiddenLayerTextBox.Text = "20";
+            this.hiddenLayerTextBox.Text = "40";
             // 
             // AddToTrainingSetButton
             // 
@@ -199,23 +199,6 @@
             this.RecognizeButton.Text = "Recognize";
             this.RecognizeButton.UseVisualStyleBackColor = true;
             this.RecognizeButton.Click += new System.EventHandler(this.Recognize);
-            // 
-            // digit
-            // 
-            this.digit.Location = new System.Drawing.Point(15, 213);
-            this.digit.Name = "digit";
-            this.digit.Size = new System.Drawing.Size(110, 32);
-            this.digit.TabIndex = 18;
-            // 
-            // grid
-            // 
-            this.grid.CellSize = 20;
-            this.grid.Columns = 5;
-            this.grid.Location = new System.Drawing.Point(265, 23);
-            this.grid.Name = "grid";
-            this.grid.Rows = 7;
-            this.grid.Size = new System.Drawing.Size(100, 140);
-            this.grid.TabIndex = 0;
             // 
             // textBox6
             // 
@@ -287,6 +270,23 @@
             this.button3.Text = "Recognize";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Recognize);
+            // 
+            // digit
+            // 
+            this.digit.Location = new System.Drawing.Point(15, 213);
+            this.digit.Name = "digit";
+            this.digit.Size = new System.Drawing.Size(110, 32);
+            this.digit.TabIndex = 18;
+            // 
+            // grid
+            // 
+            this.grid.CellSize = 20;
+            this.grid.Columns = 5;
+            this.grid.Location = new System.Drawing.Point(265, 23);
+            this.grid.Name = "grid";
+            this.grid.Rows = 7;
+            this.grid.Size = new System.Drawing.Size(100, 140);
+            this.grid.TabIndex = 0;
             // 
             // Main
             // 

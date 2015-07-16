@@ -7,20 +7,19 @@ namespace DigitsClassifier
     {
         static void Main(string[] args)
         {
-            var imagesFile = "d:\\train-images";
-            var labelsFile = "d:\\train-labels";
-
             var mnistDataParser = new MnistDataParser();
-            var trainingRecords = mnistDataParser.Parse(imagesFile, labelsFile);
-            
-            var inputLayerLength = trainingRecords[0].Input.Length;
+            var trainingRecords = mnistDataParser.Parse("d:\\train-images", "d:\\train-labels");
+            var testRecords = mnistDataParser.Parse("d:\\test-images", "d:\\test-labels");
 
-            var neuralNetwork = new Network(new[] {inputLayerLength, 30, 10});
-            neuralNetwork.Train(trainingRecords, 30, 3.0);
-            
-            var benchmark = new Benchmark();
-            double successRate = benchmark.ComputeAccuracy(neuralNetwork, trainingRecords);
-            Console.WriteLine("Success rate: {0} %", successRate);
+            var neuralNetwork = new Network(new[] {784, 30, 10});
+            var benchmark = new Benchmark(neuralNetwork);
+                
+            while (true)
+            {
+                neuralNetwork.Train(trainingRecords, 1, .1);
+
+                Console.WriteLine("Success rate: {0}", benchmark.AccuracyFor(testRecords));
+            }
         }
     }
 }

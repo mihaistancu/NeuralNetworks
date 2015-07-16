@@ -42,7 +42,7 @@ namespace NeuralNetwork
 
             for (int i = 0; i < n; i++)
             {
-                vector[i] = random.NextDouble();
+                vector[i] = random.NextDouble() - .5;
             }
 
             return vector;
@@ -113,13 +113,35 @@ namespace NeuralNetwork
         {
             double[][] result = new double[matrix.Length][];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < matrix.Length; i++)
             {
                 result[i] = new double[matrix[i].Length];
 
                 for (int j = 0; j < matrix[i].Length; j++)
                 {
                     result[i][j] = scalar * matrix[i][j];
+                }
+            }
+
+            return result;
+        }
+
+        public static double[][][] Product(double scalar, double[][][] matrix)
+        {
+            double[][][] result = new double[matrix.Length][][];
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                result[i] = new double[matrix[i].Length][];
+
+                for (int j = 0; j < matrix[i].Length; j++)
+                {
+                    result[i][j] = new double[matrix[i][j].Length];
+
+                    for (int k = 0; k < matrix[i][j].Length; k++)
+                    {
+                        result[i][j][k] = scalar*matrix[i][j][k];
+                    }
                 }
             }
 
@@ -149,6 +171,28 @@ namespace NeuralNetwork
                 for (int j = 0; j < a[i].Length; j++)
                 {
                     result[i][j] = a[i][j] - b[i][j];
+                }
+            }
+
+            return result;
+        }
+
+        public static double[][][] Subtract(double[][][] a, double[][][] b)
+        {
+            double[][][] result = new double[a.Length][][];
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                result[i] = new double[a[i].Length][];
+
+                for (int j = 0; j < a[i].Length; j++)
+                {
+                    result[i][j] = new double[a[i][j].Length];
+
+                    for (int k = 0; k < a[i][j].Length; k++)
+                    {
+                        result[i][j][k] = a[i][j][k] - b[i][j][k];
+                    }
                 }
             }
 
@@ -213,8 +257,7 @@ namespace NeuralNetwork
 
         public static double SigmoidPrime(double z)
         {
-            return System.Math.Exp(-z)/
-                   System.Math.Pow(1.0 + System.Math.Exp(-z), 2);
+            return Sigmoid(z) * (1 - Sigmoid(z));
         }
 
         public static double[] Sigmoid(double[] x)
